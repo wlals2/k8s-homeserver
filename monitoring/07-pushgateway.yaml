@@ -1,0 +1,57 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pushgateway
+  namespace: monitoring
+  labels:
+    app: pushgateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pushgateway
+  template:
+    metadata:
+      labels:
+        app: pushgateway
+    spec:
+      containers:
+      - name: pushgateway
+        image: prom/pushgateway:latest
+        ports:
+        - containerPort: 9091
+          name: http
+        volumeMounts:
+        - name: pushgateway-data
+          mountPath: /data
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
+      volumes:
+      - name: pushgateway-data
+        persistentVolumeClaim:
+          claimName: pushgateway-data-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pushgateway
+  namespace: monitoring
+  labels:
+    app: pushgateway
+spec:
+  type: NodePort
+  ports:
+  - port: 9091
+    targetPort: 9091
+    nodePort: 30091  # 외부에서 <node-ip>:30091로 접근
+    protocol: TCP
+    name: http
+  selector:
+    app: pushgateway

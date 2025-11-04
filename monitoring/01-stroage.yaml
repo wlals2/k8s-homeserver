@@ -1,0 +1,42 @@
+---
+# Prometheus Data PVC (Longhorn)
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: prometheus-data-pvc
+  namespace: monitoring
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn  # Longhorn 사용
+  resources:
+    requests:
+      storage: 10Gi
+---
+# Grafana Data PVC (Longhorn)
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: grafana-data-pvc
+  namespace: monitoring
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 3Gi
+---
+# Pushgateway Data PVC (Longhorn)
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pushgateway-data-pvc
+  namespace: monitoring
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 5Gi

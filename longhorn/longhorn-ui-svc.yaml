@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2025-11-03T01:48:36Z"
+  labels:
+    app: longhorn-ui
+    app.kubernetes.io/instance: longhorn
+    app.kubernetes.io/name: longhorn
+    app.kubernetes.io/version: v1.5.3
+  name: longhorn-ui-np
+  namespace: longhorn-system
+  resourceVersion: "578714"
+  uid: 836fefd9-6c6a-48a8-848b-6756fa583f1b
+spec:
+  clusterIP: 10.108.136.10
+  clusterIPs:
+  - 10.108.136.10
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - nodePort: 31250
+    port: 80
+    protocol: TCP
+    targetPort: 8000
+  selector:
+    app: longhorn-ui
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}

@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"longhorn-ui","app.kubernetes.io/instance":"longhorn","app.kubernetes.io/name":"longhorn","app.kubernetes.io/version":"v1.5.3"},"name":"longhorn-frontend","namespace":"longhorn-system"},"spec":{"ports":[{"name":"http","nodePort":null,"port":80,"targetPort":"http"}],"selector":{"app":"longhorn-ui"},"type":"ClusterIP"}}
+  creationTimestamp: "2025-11-03T01:38:53Z"
+  labels:
+    app: longhorn-ui
+    app.kubernetes.io/instance: longhorn
+    app.kubernetes.io/name: longhorn
+    app.kubernetes.io/version: v1.5.3
+  name: longhorn-frontend
+  namespace: longhorn-system
+  resourceVersion: "326141"
+  uid: 84cd5f3e-aa75-4fbe-8ab9-9d7f080358c6
+spec:
+  clusterIP: 10.106.138.175
+  clusterIPs:
+  - 10.106.138.175
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: http
+  selector:
+    app: longhorn-ui
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
